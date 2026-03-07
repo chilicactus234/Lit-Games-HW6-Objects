@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=4 uid="uid://krm5k3qbjil6"]
+[gd_scene load_steps=10 format=4 uid="uid://krm5k3qbjil6"]
 
 [ext_resource type="Script" uid="uid://bpyl7ep5g5y4k" path="res://Scripts/Rotate.gd" id="1_amvju"]
 [ext_resource type="Script" uid="uid://c5t06kaoefljy" path="res://Scripts/CharacterMovement.gd" id="2_p8r5b"]
 [ext_resource type="Texture2D" uid="uid://w1vm0ib8gkl7" path="res://icon.svg" id="3_apj2e"]
 [ext_resource type="TileSet" uid="uid://dv5pq4cqkyek7" path="res://Scenes/castle_tileset.tres" id="3_goot7"]
+[ext_resource type="Script" uid="uid://da74jd8iemvvm" path="res://Scenes/character_body_2d.gd" id="4_6gj3g"]
 [ext_resource type="PackedScene" uid="uid://cj1vyr6kvr67l" path="res://Scenes/crate.tscn" id="4_onmak"]
 [ext_resource type="Texture2D" uid="uid://duqvx7htykro6" path="res://Art/tree.png" id="5_gwuyb"]
 
@@ -34,6 +35,9 @@ visible = false
 position = Vector2(0, -0.4758911)
 scale = Vector2(0.9999992, 1)
 shape = SubResource("RectangleShape2D_glao0")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="CharacterBody2D"]
+script = ExtResource("4_6gj3g")
 
 [node name="TileMap" type="Node" parent="."]
 

@@ -3,7 +3,7 @@ extends CharacterBody2D
 var force_coefficient = 20
 var apply_gravity : bool
 var gravity = ProjectSettings.get("physics/2d/default_gravity")
-
+var jump_velocity = 500
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -11,8 +11,9 @@ func _ready():
 		apply_gravity = true
 	else: 
 		apply_gravity = false # Motion Mode 1 is for "floating", which is for top-down games
+	
 	pass # Replace with function body.
-
+		
 func get_input(delta):
 	var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if apply_gravity:
@@ -20,14 +21,14 @@ func get_input(delta):
 		velocity.y += gravity * delta
 	else:
 		velocity = input_direction * movement_speed
-
-
-
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = jump_velocity
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	get_input(delta)
-
+	if not is_on_floor():
+		velocity += get_gravity() * delta
 	var pre_collision_velocity
 	pre_collision_velocity = velocity # velocity goes to 0,0 when we collide, which is why we record the velocity prior to the move_and_slide() func call
 	move_and_slide()
